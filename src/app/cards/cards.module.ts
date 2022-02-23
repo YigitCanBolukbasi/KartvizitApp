@@ -8,6 +8,9 @@ import { CartItemComponent } from './cart-item/cart-item.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { CardModalComponent } from './card-modal/card-modal.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CardsComponent, CartItemComponent, CardModalComponent],
@@ -17,6 +20,10 @@ import { CardModalComponent } from './card-modal/card-modal.component';
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class CardsModule {}

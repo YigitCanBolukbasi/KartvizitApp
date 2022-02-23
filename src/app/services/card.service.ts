@@ -14,4 +14,11 @@ export class CardService {
       `https://demo.limantech.com/cards/public/api/cards`
     );
   }
+
+  addCard(card: Cart) {
+    return this.http.post(
+      `https://demo.limantech.com/cards/public/api/cards`,
+      card
+    );
+  }
 }
