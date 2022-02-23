@@ -7,17 +7,28 @@ import { Cart } from '../models/cart';
   providedIn: 'root',
 })
 export class CardService {
+  cards!: Cart[];
+
   constructor(private http: HttpClient) {}
 
-  getCards(): Observable<Cart[]> {
-    return this.http.get<Cart[]>(
-      `https://demo.limantech.com/cards/public/api/cards`
-    );
+  getCards(): void {
+    this.http
+      .get<Cart[]>(`https://demo.limantech.com/cards/public/api/cards`)
+      .subscribe((res: Cart[]) => {
+        this.cards = res;
+      });
   }
 
   addCard(card: Cart) {
     return this.http.post(
       `https://demo.limantech.com/cards/public/api/cards`,
+      card
+    );
+  }
+
+  updateCard(card: Cart, cardId: number) {
+    return this.http.put(
+      `https://demo.limantech.com/cards/public/api/cards/${cardId}`,
       card
     );
   }

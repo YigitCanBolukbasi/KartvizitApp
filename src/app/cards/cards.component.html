@@ -5,12 +5,12 @@
       <p class="page-description">You can manage your business cards from this screen.</p>
       <hr />
     </div>
-    <button mat-flat-button color="primary" (click)="openAddCardModal()">yeni kartvizit</button>
+    <button mat-flat-button color="primary" (click)="openAddCardModal()">Create New Card</button>
   </div>
 
   <div class="cards">
     <div class="row">
-      <div class="col-12 col-md-4" *ngFor="let card of cards">
+      <div class="col-12 col-md-4" *ngFor="let card of cardService.cards">
         <app-cart-item [cardItem]="card"></app-cart-item>
       </div>
 

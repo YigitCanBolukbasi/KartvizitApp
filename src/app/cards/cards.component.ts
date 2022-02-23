@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CardService } from '../services/card.service';
 import { CardModalComponent } from './card-modal/card-modal.component';
-import { Cart } from '../models/cart';
 
 @Component({
   selector: 'app-cards',
@@ -10,30 +9,15 @@ import { Cart } from '../models/cart';
   styleUrls: ['./cards.component.scss'],
 })
 export class CardsComponent implements OnInit {
-  cards!: Cart[];
-
-  constructor(public dialog: MatDialog, private cardService: CardService) {}
+  constructor(public dialog: MatDialog, public cardService: CardService) {}
 
   ngOnInit(): void {
-    this.getCards();
+    this.cardService.getCards();
   }
 
   openAddCardModal() {
     const dialog = this.dialog.open(CardModalComponent, {
       width: '480px',
     });
-
-    dialog.afterClosed().subscribe((res) => {
-      if (res) {
-        this.getCards();
-      }
-    });
-  }
-
-  getCards(): void {
-    this.cardService.getCards().subscribe((res: Cart[]) => {
-      this.cards = res;
-    });
-    console.log('burada', this.cards);
   }
 }
