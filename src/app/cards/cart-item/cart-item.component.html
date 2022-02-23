@@ -1,5 +1,5 @@
 <mat-card class="card-item">
-  <mat-card-header>
+  <mat-card-header class="changeMause" (click)="openUpdateCardModal(cardItem)">
     <mat-card-title>{{ cardItem.name }}</mat-card-title>
     <mat-card-subtitle> {{cardItem.title}} </mat-card-subtitle>
   </mat-card-header>
@@ -8,11 +8,11 @@
       <li class="list-group-item"> {{cardItem.phone}} </li>
       <li class="list-group-item" *ngIf="cardItem.email; else noEmail"> {{cardItem.email}} </li>
       <ng-template #noEmail>
-        <small class="text-danger mt-3"> E posta adresi girilmemiş</small>
+        <small class="text-danger mt-3"> Email address is not entered</small>
       </ng-template>
       <li class="list-group-item" *ngIf="cardItem.address; else noAddress"> {{cardItem.address}} </li>
       <ng-template #noAddress>
-        <small class="text-danger">Adres bilgisi girilmemiş</small>
+        <small class="text-danger">address is not entered</small>
       </ng-template>
     </ul>
   </mat-card-content>

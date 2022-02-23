@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Yeni Kartvizit Oluştur</h2>
+<h2 mat-dialog-title>{{data? "fix card": "Create new card"}}</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="cardForm">
     <mat-form-field class="example-full-width" appearance="fill">
@@ -25,6 +25,6 @@
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Vazgeç</button>
-  <button mat-button (click)="addCard()">ekle</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="addCard()">{{data? 'Fix': 'Add new one'}}</button>
 </mat-dialog-actions>

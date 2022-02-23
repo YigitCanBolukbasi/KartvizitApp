@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { inject } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Cart } from 'src/app/models/cart';
 import { CardService } from 'src/app/services/card.service';
 
 @Component({
@@ -16,22 +18,21 @@ export class CardModalComponent implements OnInit {
     private fb: FormBuilder,
     private cardService: CardService,
     private dialogRef: MatDialogRef<CardModalComponent>,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: Cart //  sorulacak !!!
   ) {}
 
   ngOnInit(): void {
     this.cardForm = this.fb.group({
-      name: ['', Validators.required],
-      title: '',
-      phone: ['', Validators.required],
-      email: ['', Validators.email],
-      address: [''],
+      name: [this.data?.name || '', Validators.required],
+      title: [this.data?.title || '', Validators.max(255)],
+      phone: [this.data?.phone || '', Validators.required],
+      email: [this.data?.email || '', Validators.email],
+      address: [this.data?.address || '', Validators.max(255)],
     });
   }
   addCard() {
-    console.log(this.cardForm.value);
     this.cardService.addCard(this.cardForm.value).subscribe((res: any) => {
-      console.log(res);
       this._snackBar.open(res);
       this.dialogRef.close(true);
     });
