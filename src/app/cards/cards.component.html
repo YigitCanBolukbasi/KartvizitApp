@@ -1,27 +1,19 @@
 <main>
-  <h1 class="page-title">kartvizitler</h1>
-  <p class="page-description">bu ekrandan kartvizitlerinizi yonetebilirsiniz</p>
-  <hr />
+  <div class="d-flex align-items-center">
+    <div class="flex-grow-1">
+      <h1 class="page-title">kartvizitler</h1>
+      <p class="page-description">bu ekrandan kartvizitlerinizi yonetebilirsiniz</p>
+      <hr />
+    </div>
+    <button mat-flat-button color="primary" (click)="openAddCardModal()">yeni kartvizit</button>
+  </div>
+
   <div class="cards">
     <div class="row">
-      <div class="col-12 col-md-4">
-        <app-cart-item [cardItem]="cardItem"></app-cart-item>
+      <div class="col-12 col-md-4" *ngFor="let card of cards">
+        <app-cart-item [cardItem]="card"></app-cart-item>
       </div>
-      <div class="col-12 col-md-4">
-        <app-cart-item [cardItem]="cardItem"></app-cart-item>
-      </div>
-      <div class="col-12 col-md-4">
-        <app-cart-item [cardItem]="cardItem"></app-cart-item>
-      </div>
-      <div class="col-12 col-md-4">
-        <app-cart-item [cardItem]="cardItem"></app-cart-item>
-      </div>
-      <div class="col-12 col-md-4">
-        <app-cart-item [cardItem]="cardItem"></app-cart-item>
-      </div>
-      <div class="col-12 col-md-4">
-        <app-cart-item [cardItem]="cardItem"></app-cart-item>
-      </div>
+
     </div>
   </div>
 </main>
