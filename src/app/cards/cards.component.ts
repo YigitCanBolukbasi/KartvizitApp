@@ -19,8 +19,14 @@ export class CardsComponent implements OnInit {
   }
 
   openAddCardModal() {
-    this.dialog.open(CardModalComponent, {
+    const dialog = this.dialog.open(CardModalComponent, {
       width: '480px',
+    });
+
+    dialog.afterClosed().subscribe((res) => {
+      if (res) {
+        this.getCards();
+      }
     });
   }
 
