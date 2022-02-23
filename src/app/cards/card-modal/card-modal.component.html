@@ -31,12 +31,12 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <div class="flex-grow-1 text-start" *ngIf="data">
-    <button mat-stroked-button color="warn" (click)="deleteCard()">Delete this Card </button>
+    <button mat-stroked-button color="warn" (click)="deleteCard()" [disabled]="showspinner">Delete this Card </button>
   </div>
   <div>
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-flat-button color="primary" (click)="data? updateCard() : addCard()"
-      [disabled]="cardForm.invalid">{{data?
+      [disabled]="cardForm.invalid || showspinner">{{data?
       'Fix': 'Add
       new
       one'}}</button>

@@ -25,20 +25,23 @@ export class CardModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.cardForm = this.fb.group({
-      name: [this.data?.name || '', [Validators.required, Validators.max(255)]],
+      name: [
+        this.data?.name || '',
+        [Validators.required, Validators.maxLength(255)],
+      ],
       title: [
         this.data?.title || '',
-        [Validators.required, Validators.max(50)],
+        [Validators.required, Validators.maxLength(50)],
       ],
       phone: [
         this.data?.phone || '',
-        [Validators.required, Validators.max(20)],
+        [Validators.required, Validators.maxLength(20)],
       ],
       email: [
         this.data?.email || '',
-        [Validators.required, Validators.max(50)],
+        [Validators.required, Validators.maxLength(50)],
       ],
-      address: [this.data?.address || '', Validators.max(255)],
+      address: [this.data?.address || '', Validators.maxLength(255)],
     });
   }
   addCard() {
