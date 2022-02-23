@@ -13,6 +13,7 @@ import { CardService } from 'src/app/services/card.service';
 })
 export class CardModalComponent implements OnInit {
   cardForm!: FormGroup;
+  showspinner: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -24,29 +25,52 @@ export class CardModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.cardForm = this.fb.group({
-      name: [this.data?.name || '', Validators.required],
-      title: [this.data?.title || '', Validators.max(255)],
-      phone: [this.data?.phone || '', Validators.required],
-      email: [this.data?.email || '', Validators.email],
+      name: [this.data?.name || '', [Validators.required, Validators.max(255)]],
+      title: [
+        this.data?.title || '',
+        [Validators.required, Validators.max(50)],
+      ],
+      phone: [
+        this.data?.phone || '',
+        [Validators.required, Validators.max(20)],
+      ],
+      email: [
+        this.data?.email || '',
+        [Validators.required, Validators.max(50)],
+      ],
       address: [this.data?.address || '', Validators.max(255)],
     });
   }
   addCard() {
+    this.showspinner = true;
     this.cardService.addCard(this.cardForm.value).subscribe((res: any) => {
       this._snackBar.open(res);
       this.cardService.getCards();
+      this.showspinner = false;
       this.dialogRef.close(true);
     });
   }
 
   updateCard(): void {
+    this.showspinner = true;
     this.cardService
       .updateCard(this.cardForm.value, this.data.id)
       .subscribe((res: any) => {
         console.log(res);
         this._snackBar.open(res);
         this.cardService.getCards();
+        this.showspinner = false;
         this.dialogRef.close(true);
       });
+  }
+
+  deleteCard(): void {
+    this.showspinner = true;
+    this.cardService.deleteCard(this.data.id).subscribe((res: any) => {
+      this._snackBar.open(res);
+      this.cardService.getCards();
+      this.showspinner = false;
+      this.dialogRef.close(true);
+    });
   }
 }

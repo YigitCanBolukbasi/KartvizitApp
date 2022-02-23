@@ -32,4 +32,10 @@ export class CardService {
       card
     );
   }
+
+  deleteCard(cardId: number): Observable<any> {
+    return this.http.delete(
+      `https://demo.limantech.com/cards/public/api/cards/${cardId}`
+    );
+  }
 }
